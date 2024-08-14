@@ -1,0 +1,6 @@
+- name: Simulate a waiting state
+  hosts: all
+  tasks:
+    - name: Pause execution for 10 minutes
+      pause:
+        minutes: 10
