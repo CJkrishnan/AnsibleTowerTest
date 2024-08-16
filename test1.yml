@@ -1,8 +1,7 @@
 - name: Launch a job template and wait for completion
   hosts: localhost
   tasks:
-    - name: trigger
-      tower_job_launch:
+    - tower_job_launch:
         job_template: "Your Job Template Name"
         wait: true
         timeout: 3600  # Timeout in seconds (adjust as needed)
