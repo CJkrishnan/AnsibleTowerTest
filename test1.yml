@@ -1,4 +1,25 @@
-- name: Sleep for 300 seconds and continue with play
-  ansible.builtin.wait_for:
-    timeout: 300
-  delegate_to: localhost
+- name: Ensure a certain amount of time has elapsed between two tasks
+  hosts: localhost
+  gather_facts: false
+  vars:
+    wait_time: 10
+    pause: 5
+    offset: 2
+  tasks:
+    - debug:
+        msg: "start_time: {{ '%Y-%m-%d %H:%M:%S'|strftime }}"
+    - wait_for:
+        timeout: "{{ wait_time|int - offset|int }}"
+      async: 20
+      poll: 0
+      register: async_result
+    - pause:
+        seconds: "{{ pause }}"
+    - async_status:
+        jid: "{{ async_result.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      retries: "{{ wait_time|int - pause|int }}"
+      delay: 1
+    - debug:
+        msg: "Something happened at {{ '%Y-%m-%d %H:%M:%S'|strftime }}"
