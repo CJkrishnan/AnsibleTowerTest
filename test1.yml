@@ -2,7 +2,7 @@
   hosts: localhost
   gather_facts: false
   vars:
-    wait_time: 100
+    wait_time: 30
     pause: 15
     offset: 2
   tasks:
