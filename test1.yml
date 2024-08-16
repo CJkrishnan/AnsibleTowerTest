@@ -1,13 +1,15 @@
 - name: Launch a job template and wait for completion
   hosts: localhost
   tasks:
-    - name: TriggerAnsibleTowerjobtemplate
+    - 
+      name: TriggerAnsibleTowerjobtemplate
       tower_job_launch:
         job_template: "JT15"
         wait: true
         timeout: 3600  # Timeout in seconds (adjust as needed)
       register: job_result
 
-    - name: Displayjobstatus
+    - 
+      name: Displayjobstatus
       debug:
         var: job_result.status
