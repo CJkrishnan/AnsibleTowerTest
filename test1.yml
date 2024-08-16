@@ -2,8 +2,8 @@
   hosts: localhost
   gather_facts: false
   vars:
-    wait_time: 10
-    pause: 5
+    wait_time: 100
+    pause: 50
     offset: 2
   tasks:
     - debug:
