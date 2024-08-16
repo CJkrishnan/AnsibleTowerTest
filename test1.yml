@@ -8,11 +8,6 @@
       src: ./hosts
       dest: /tmp/hosts_backup
       mode: '0644'
-  - name: Add the user 'bob'
-    ansible.builtin.user:
-      name: bob
-    become: yes
-    become_method: sudo
   - name: Upgrade all apt packages
     apt:
       force_apt_get: yes
