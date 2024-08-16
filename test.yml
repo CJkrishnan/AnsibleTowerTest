@@ -1,6 +1,18 @@
-- name: Simulate a waiting state
-  hosts: all
+- name: Monitor Ansible Tower Job Status
+  hosts: localhost
+  gather_facts: no
   tasks:
-    - name: Pause execution for 10 minutes
-      pause:
-        minutes: 10
+    - name: Trigger a job in Ansible Tower
+      awx.awx.tower_job:
+        job_template: 20
+        state: "present"
+      register: job_result
+    - name: Wait for the job to complete
+      awx.awx.tower_job_wait:
+        id: "{{ job_result.id }}"
+        timeout: 600  # Timeout in seconds
+        status: "successful"  # Optional: specify the expected final status
+      register: wait_result
+    - name: Display job status
+      debug:
+        msg: "The job status is {{ wait_result.status }} and the result is {{ wait_result.result }}"
