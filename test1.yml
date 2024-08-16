@@ -1,5 +1,5 @@
 - name: Ensure a certain amount of time has elapsed between two tasks
-  hosts: 12344
+  hosts: testhost
   gather_facts: false
   vars:
     wait_time: 100
