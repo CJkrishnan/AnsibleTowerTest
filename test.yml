@@ -4,7 +4,7 @@
   tasks:
     - name: Trigger a job in Ansible Tower
       awx.awx.tower_job:
-        job_template: 20
+        job_template: 23
         state: "present"
       register: job_result
     - name: Wait for the job to complete
