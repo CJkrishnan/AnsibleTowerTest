@@ -1,7 +1,7 @@
 - name: Launch a job template and wait for completion
   hosts: localhost
   tasks:
-    - name: Trigger Ansible Tower job template
+    - name: trigger
       tower_job_launch:
         job_template: "Your Job Template Name"
         wait: true
