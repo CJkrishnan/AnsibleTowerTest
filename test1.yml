@@ -1,16 +1,8 @@
----
-- name: Intro to Ansible Playbooks
-  hosts: all
-
-  tasks:
-  - name: Copy file hosts with permissions
-    ansible.builtin.copy:
-      delay: 60
-      src: ./hosts
-      dest: /tmp/hosts_backup
-      mode: '0644'
-  - name: Upgrade all apt packages
-    apt:
-      force_apt_get: yes
-      upgrade: dist
-    become: yes
+- name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+  ansible.builtin.wait_for:
+    port: 22
+    host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+    search_regex: OpenSSH
+    delay: 60
+  vars:
+    ansible_connection: local
