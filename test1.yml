@@ -2,6 +2,8 @@
   tower_job_launch:
     job_template: "My Job Template"
     register: job
+    pause:
+        minutes: 10
 
 - name: Wait for job max 120s
   tower_job_wait:
