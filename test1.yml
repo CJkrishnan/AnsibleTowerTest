@@ -1,12 +1,9 @@
-- name: Launch a job template and wait for completion
-  hosts: localhost
-  tasks:
-    - tower_job_launch:
-        job_template: "Your Job Template Name"
-        wait: true
-        timeout: 3600  # Timeout in seconds (adjust as needed)
-      register: job_result
+- name: Launch a job
+  tower_job_launch:
+    job_template: "My Job Template"
+    register: job
 
-    - name: Display job status
-      debug:
-        var: job_result.status
+- name: Wait for job max 120s
+  tower_job_wait:
+    job_id: "{{ job.id }}"
+    timeout: 120
