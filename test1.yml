@@ -4,9 +4,8 @@
 
   tasks:
   - name: Copy file hosts with permissions
-    pause:
-      minutes: 10
     ansible.builtin.copy:
+      delay: 60
       src: ./hosts
       dest: /tmp/hosts_backup
       mode: '0644'
