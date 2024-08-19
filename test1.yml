@@ -1,25 +1,6 @@
-- name: Ensure a certain amount of time has elapsed between two tasks
-  hosts: localhost
-  gather_facts: false
-  vars:
-    wait_time: 100
-    pause: 50
-    offset: 2
+- name: Wait for 60 seconds
+  hosts: all
   tasks:
-    - debug:
-        msg: "start_time: {{ '%Y-%m-%d %H:%M:%S'|strftime }}"
-    - wait_for:
-        timeout: "{{ wait_time|int - offset|int }}"
-      async: 20
-      poll: 0
-      register: async_result
-    - pause:
-        seconds: "{{ pause }}"
-    - async_status:
-        jid: "{{ async_result.ansible_job_id }}"
-      register: job_result
-      until: job_result.finished
-      retries: "{{ wait_time|int - pause|int }}"
-      delay: 1
-    - debug:
-        msg: "Something happened at {{ '%Y-%m-%d %H:%M:%S'|strftime }}"
+    - name: Pause for 60 seconds
+      pause:
+        seconds: 60
