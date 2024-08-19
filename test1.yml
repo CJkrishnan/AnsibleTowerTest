@@ -1,6 +1,6 @@
-- name: Wait for 60 seconds using wait_for
+- name: Wait for 60 seconds
   hosts: all
   tasks:
-    - name: Wait for 60 seconds
-      wait_for:
-        timeout: 60
+    - name: Pause for 60 seconds
+      pause:
+        seconds: 120
